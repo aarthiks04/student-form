@@ -1,0 +1,110 @@
+<center>
+    <h1>STUDENT FORM</h1>
+    <table border="1"  style="width: 25%;">
+        <tbody >
+        <tr">
+            <td style="background-color: gray;">Name </td><td><input id="one" type="text" oninput="convert(this)" style="width: 100%;" placeholder="Enter Your Name"></td>
+        </tr>
+        <tr>
+            <td style="background-color: gray;">Age </td><td><input id="two" type="number" min="18" max="40" style="width: 100%;" placeholder="Enter Your Age"></td>
+        </tr>
+        <tr>
+            <td style="background-color: gray;">Gender</td>
+            <td id="three" > <input name="gender" type="radio" id="male" ><label for="male">Male</label><input name="gender" type="radio" id="female"><label for="female">Female</label></td>
+        </tr>
+        <tr>
+            <td style="background-color: gray;">Course</td>
+            <td ><select id="four" style="width: 100%;">
+                <option value="" disabled selected hidden></option>
+                <option>C</option>
+                <option>C++</option>
+                <option>JAVA</option>
+                <option>JAVASCRIPT</option>
+                <option>PYTHON</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td style="background-color: gray;">Email</td>
+            <td><input  id="five" style="width: 100%;" oninput="lower(this)" placeholder="*****@gmail.com"></td>
+        </tr>
+        <tr>
+            <td><button  onclick="save()" style="background-color: green; width: 100%;">Save</button></td>
+            <td><button  onclick="update()" style="background-color: lightblue;">Clear</button></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+<table border="1">
+        <tbody id="another">
+            <tr>
+                <td style="background-color: gray; width:10%;">Name </td>
+                <td style="background-color: gray; width: 10%;">Age </td>
+                <td style="background-color: gray; width: 10%;">Course </td>
+                <td style="background-color: gray; width: 10%;">Gender </td>
+                <td style="background-color: gray; width: 10%;">Email </td>
+                <td style="background-color: gray; width: 10%;">Action</td>
+            </tr>
+        </tbody>
+    </table>
+</center>
+
+
+<script>
+    function update(){
+        document.getElementById("one").value=''
+        document.getElementById("two").value=''
+        document.getElementById("male").checked=''
+        document.getElementById("female").checked=''
+        document.getElementById("four").value=''
+        document.getElementById("five").value=''
+    }
+    var c=document.getElementById("male")
+    var c1=document.getElementById("female")
+    var m=document.getElementById("another")
+    function save(){
+        if(document.getElementById("two").value>=18 && document.getElementById("two").value<=40){
+            let selectgender
+            if(c.checked){
+                selectgender="Male"
+            }
+            else if(c1.checked){
+                selectgender="Female"
+            }
+            var n=document.createElement("tr")
+            var td1=document.createElement("td")
+            var td2=document.createElement("td")
+            var td3=document.createElement("td")
+            var td4=document.createElement("td")
+            var td5=document.createElement("td")
+            var td6=document.createElement("td")
+            td1.innerHTML=document.getElementById("one").value
+            td2.innerHTML=document.getElementById("two").value
+            td3.innerHTML=document.getElementById("four").value
+            td4.innerHTML=selectgender
+            td5.innerHTML=document.getElementById("five").value
+            td6.innerHTML="<button onclick=' Delete(event)' style='background-color: red;'>Delete</button>"
+            n.append(td1,td2,td3,td4,td5,td6)
+            m.append(n)
+        }
+        else {
+        alert("The age limit should be 18-40yrs!!")
+        document.getElementById("one").value=''
+        document.getElementById("two").value=''
+        document.getElementById("male").checked=''
+        document.getElementById("female").checked=''
+        document.getElementById("four").value=''
+        document.getElementById("five").value=''
+        }
+    }
+    function Delete(){
+        event.target.parentElement.parentElement.remove()
+    }
+    function convert(inputElement){
+        inputElement.value=inputElement.value.toUpperCase()
+    }
+    function lower(inputElement){
+        inputElement.value=inputElement.value.toLowerCase()
+    }
+
+</script>
